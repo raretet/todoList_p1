@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { Header } from './components/Header/Header';
+import { TodoPanel } from './components/TodoPanel/TodoPanel';
+
+import s from './App.module.css';
+
+const DEFAULT_TODO_LIST = [
+  {
+    id: 1,
+    name: 'task 1',
+    description: 'description 1',
+    checked: false
+  },
+
+  {
+    id: 2,
+    name: 'task 2',
+    description: 'description 1',
+    checked: false
+  },
+
+  {
+    id: 3,
+    name: 'task 3',
+    description: 'description 3 so long so long so long so long so long so long so long so long so long so long so long',
+    checked: true
+  }
+]
+ 
+export const App = () => {
+
+  const [todos, setTodos] = React.useState(DEFAULT_TODO_LIST);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={s.app_container}>
+      <div className={s.container}>
+        <Header todoCount={todos.length}/>
+        <TodoPanel/>
+      </div>
     </div>
   );
 }
 
-export default App;
