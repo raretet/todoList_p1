@@ -4,6 +4,7 @@ import { Header } from './components/Header/Header';
 import { TodoPanel } from './components/TodoPanel/TodoPanel';
 
 import s from './App.module.css';
+import { TodoList } from './components/TodoList/TodoList';
 
 const DEFAULT_TODO_LIST = [
   {
@@ -32,11 +33,16 @@ export const App = () => {
 
   const [todos, setTodos] = React.useState(DEFAULT_TODO_LIST);
 
+  const addTodo = ({name, description}: Omit<Todo, 'checked' | 'id'>) => {
+    setTodos([...todos, {id: todos[todos.length - 1].id +1, description, name, checked: false}])
+  }
+
   return (
     <div className={s.app_container}>
       <div className={s.container}>
         <Header todoCount={todos.length}/>
-        <TodoPanel/>
+        <TodoPanel addTodo={addTodo}/>
+        <TodoList todos={todos}/>
       </div>
     </div>
   );
